@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiongkok - PT Jelajah Nusantara</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body class="halaman-artikel">
+    <header>
+        <h1>Tiongkok</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="tiongkok.html">Tiongkok</a></li>
+                <li><a href="jepang.html">Jepang</a></li>
+                <li><a href="swiss.html">Switzerland</a></li>
+                <li><a href="bali.html">Bali</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+             <center><h2><font color="#009DC4"> Tembok Besar Tiongkok </font></h2></center>  
+            <center><img src="Gambar/Tembok-Besar-Tiongkok-–-Beijing-Copy.jpg" alt="Tembok Besar Tiongkok" Width="500"></center>
+            
+
+            <p>Siapa yang tidak kenal dengan Tembok Besar Tiongkok, sebuah bangunan bersejarah yang menjadi ikon dari Negara Tiongkok. Tembok ini wajib kamu kunjungi jika kamu berkunjung ke Tiongkok. Kamu akan menemukan tembok yang megah ini masih berdiri dan terjaga dengan baik.
+
+            <p>Tembok yang dibuat sekitar abad ke 5-7 sebelum masehi ini merupakan sebuah benteng pertahanan. Ketinggian benteng ini tidak rata, ada yang enam sampai delapan meter, hingga 16 meter, bergantung dengan kontur pegunungannya. Tembok ini dibangun oleh beberapa dinasti yang berkuasa</p> 
+            
+            <p>Jika kamu ingin mengunjungi Tembok Besar Tiongkok ini, kamu bisa melakukannya dengan berjalan kaki untuk orang yang senang hiking. Untuk manula dan yang tidak kuat berjalan kamu juga bisa menggunakan Cable Car atau dengan Chairlift.</p>
+            
+            <p>Fasilitas yang di sediakan : <br>
+               - Area parkir <br>
+               - Restoran dan kios makanan <br>
+               - Toilet umum <br>
+               - Toko suvenir <br>
+               - Cable car / transportasi wisata <br>
+               - Pos kesehatan <br>
+               - Jalur hiking <br>
+               - Spot foto dan menara pengawas <br>
+            </p>
+            <P>Alamat: <br>
+                    - Mutianyu, Beijing, RRT <br>
+                    - Jam buka: 07.00 – 18.00 <br>
+                    - HTM: Dewasa CNY 40, Manula di atas 60 & Anak anak dengan tinggi 1,2-1,4 m CNY 20</P> </font>
+            
+        </article>
+        <article>
+            <h2>Paket Yang Tersedia</h2>
+            <img src="gambar/Screenshot 2026-03-12 202451.png" alt="Paket Yang Tersedia Tiongkok" Width="600"> <br>
+            <p><b>Jika Anda Tertarik Untuk Memesan Paket Silahkan Klik Link Di Bawah Ini :</b> 
+            </p>
+            <a href="https://www.klook.com/id/activity/157175-beijing-mutianyu-great-wall-wtown-simatai-2-day-tour-group-2-6pes/?msockid=12d6832b9c88638e09a694319d6662d9">Paket Tembok Besar Tiongkok</a>
+        </article>
+        <aside>
+            <h3>Event Mendatang:</h3>
+            <ul>
+                <li><a href="https://www.tiket.com/id-id/to-do/tiket-mutianyu-great-wall-tour">Event Tour Tembok China 2027</a></li>
+                <li><a href="https://www.avia.travel/tour/china">Tour Akhir Tahun ke China</a></li>
+                <li><a href="https://www.traveloka.com/id-id/activities/china/product/china-full-package-tour-beijing-chongqing-shanghai-hangzhou-suzhou-wuxi-zhengzhou-wuzhen-7d7n7d6n6d6n5d4n4d4n4d3n-tour-ho-chi-minh-departure-3973043660997">Semua Daftar Event Tour China</a></li>
+            </ul>
+        </aside>    
+    </main>
+    <footer>
+        <p>&copy; 2026 PT Jelajah Nusantara. All Rights Reserved.</p>
+        <div class="social-media">
+            <a href="https://www.instagram.com/klooktravel/">Instagram</a> | <a href="https://www.facebook.com/Trip/">Facebook</a> | <a href="https://x.com/traveloka">Twitter</a>
+        </div>
+    </footer>
+    <script>
+    // Mengambil semua gambar di dalam article
+    const images = document.querySelectorAll('article img');
+
+    images.forEach(img => {
+        img.addEventListener('click', function() {
+            // Mencari div 'card-content' yang ada di dalam article yang sama
+            const content = this.parentElement.parentElement.querySelector('.card-content');
+            
+            // Toggle (Muncul/Sembunyi)
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    });
+</script>
+</body>
+</html>
