@@ -11,7 +11,7 @@ body {
     color: #333;
 }
 
-/* ========================= HEADER ========================= */
+
 header {
     background: linear-gradient(rgba(231, 71, 7, 0.788), rgba(219, 11, 11, 0.795));
     color: white;
@@ -51,7 +51,6 @@ nav ul li a:hover {
     color: #ffd700;
 }
 
-/* ========================= HALAMAN INDEX ========================= */
 .halaman-indeks {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('../Gambar/Wisata.png');
@@ -72,7 +71,6 @@ nav ul li a:hover {
     border-radius: 20px;
 }
 
-/* Label section judul grid */
 .halaman-indeks main::before {
     content: "🌍 Destinasi Pilihan Kami";
     grid-column: 1 / -1;
@@ -141,7 +139,6 @@ nav ul li a:hover {
     background: linear-gradient(135deg, #c0392b, #e74c3c);
 }
 
-/* ========================= HALAMAN ARTIKEL ========================= */
 .halaman-artikel {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('../Gambar/Wisata.png');
@@ -150,13 +147,12 @@ nav ul li a:hover {
     background-position: center;
 }
 
-/* Grid utama halaman artikel: konten + sidebar */
 .halaman-artikel main {
     max-width: 1200px;
     margin: 40px auto;
     padding: 40px;
     display: grid;
-    grid-template-columns: 1fr 300px; /* konten | sidebar */
+    grid-template-columns: 1fr 300px;
     grid-template-rows: auto auto;
     gap: 30px;
     background: rgba(255, 255, 255, 0.1);
@@ -164,7 +160,6 @@ nav ul li a:hover {
     border-radius: 20px;
 }
 
-/* Article pertama (konten utama) */
 .halaman-artikel main > article:first-of-type {
     grid-column: 1;
     grid-row: 1;
@@ -174,7 +169,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Article kedua (paket) */
 .halaman-artikel main > article:nth-of-type(2) {
     grid-column: 1;
     grid-row: 2;
@@ -184,7 +178,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Aside sidebar — span 2 baris di kolom kanan */
 .halaman-artikel main > aside {
     grid-column: 2;
     grid-row: 1 / 3;
@@ -232,7 +225,6 @@ nav ul li a:hover {
     color: white;
 }
 
-/* Artikel styling */
 .halaman-artikel article h2 {
     font-size: 2rem;
     color: #2c3e50;
@@ -273,7 +265,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(231,71,7,0.4);
 }
 
-/* ========================= HALAMAN TENTANG ========================= */
 .halaman-tentang {
     background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
                 url('../Gambar/Wisata.png');
@@ -301,33 +292,6 @@ nav ul li a:hover {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* ========================= RESPONSIVE ========================= */
-@media (max-width: 768px) {
-    .halaman-artikel main {
-        grid-template-columns: 1fr;
-    }
-
-    .halaman-artikel main > article:first-of-type,
-    .halaman-artikel main > article:nth-of-type(2),
-    .halaman-artikel main > aside {
-        grid-column: 1;
-        grid-row: auto;
-    }
-
-    .halaman-indeks main {
-        grid-template-columns: 1fr;
-    }
-
-    header h1 {
-        font-size: 1.6rem;
-    }
-
-    nav ul li {
-        margin: 0 8px;
-    }
-}
-
-/* ========================= FOOTER ========================= */
 footer {
     background: #2c3e50;
     color: white;
@@ -346,4 +310,117 @@ footer {
 
 .social-media a:hover {
     color: #ffd700;
+}
+
+
+@media (max-width: 992px) {
+    header h1 { font-size: 2rem; }
+
+    nav ul li { margin: 0 10px; }
+
+    .halaman-indeks main {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 25px;
+    }
+
+    .halaman-artikel main {
+        grid-template-columns: 1fr 220px;
+        padding: 25px;
+    }
+
+    .halaman-artikel article h2 { font-size: 1.6rem; }
+
+    .halaman-tentang main { padding: 25px; }
+
+    footer { padding: 30px 15px; }
+}
+
+@media (max-width: 768px) {
+    header { padding: 30px 15px; }
+    header h1 { font-size: 1.5rem; }
+    header h2, header h3 { font-size: 0.95rem; }
+
+    nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+        padding: 10px;
+        border-radius: 15px;
+    }
+    nav ul li { margin: 0; }
+    nav ul li a { font-size: 0.8rem; }
+
+    .halaman-indeks main {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        margin: 20px 15px;
+    }
+
+    .halaman-artikel main {
+        grid-template-columns: 1fr;
+        padding: 20px;
+        margin: 20px 15px;
+    }
+
+    .halaman-artikel main > article:first-of-type,
+    .halaman-artikel main > article:nth-of-type(2),
+    .halaman-artikel main > aside {
+        grid-column: 1;
+        grid-row: auto;
+        position: static;
+    }
+
+    .halaman-artikel article h2 { font-size: 1.4rem; }
+
+    .halaman-tentang main {
+        padding: 20px;
+        margin: 20px 15px;
+    }
+    .halaman-tentang article { padding: 20px; }
+
+    footer { padding: 25px 15px; font-size: 0.9rem; }
+}
+
+@media (max-width: 480px) {
+    header h1 { font-size: 1.2rem; }
+
+    nav ul li a { font-size: 0.75rem; }
+
+    .halaman-indeks main {
+        padding: 15px;
+        margin: 15px 10px;
+        gap: 15px;
+    }
+
+    .halaman-indeks article img { height: 160px; }
+    .card-body { padding: 15px; }
+    .card-body h2 { font-size: 1.1rem; }
+    .btn-detail { padding: 6px 14px; font-size: 0.8rem; }
+
+    .halaman-artikel main,
+    .halaman-tentang main {
+        padding: 15px;
+        margin: 15px 10px;
+        gap: 15px;
+    }
+
+    .halaman-artikel main > article:first-of-type,
+    .halaman-artikel main > article:nth-of-type(2) { padding: 15px; }
+    .halaman-artikel article h2 { font-size: 1.2rem; }
+    .halaman-artikel main > aside { padding: 15px; }
+    .halaman-tentang article { padding: 15px; }
+
+    footer { font-size: 0.8rem; }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    header { padding: 15px; }
+    header h1 { font-size: 1.2rem; }
+
+    .halaman-indeks main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .halaman-indeks article img { height: 130px; }
 }
