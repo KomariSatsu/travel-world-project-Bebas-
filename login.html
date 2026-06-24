@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - PT Jelajah Nusantara</title>
+    <link rel="stylesheet" href="CSS/Login.css">
+    <link rel="stylesheet" href="CSS/animations.css">
+    <style>
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .login-page main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+  
+        .auth-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+            padding: 40px;
+            width: 100%;
+            max-width: 440px;
+            animation: cardSlideUp 0.5s ease;
+        }
+
+        @keyframes cardSlideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-card h2 {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #2c3e50;
+            margin-bottom: 6px;
+        }
+
+        .auth-card .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+        }
+
+        .tab-switcher {
+            display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #e74707;
+            margin-bottom: 28px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: white;
+            color: #e74707;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.25s, color 0.25s;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #e74707, #db0b0b);
+            color: white;
+        }
+
+
+        .form-panel {
+            display: none;
+        }
+
+        .form-panel.active {
+            display: block;
+            animation: panelFade 0.3s ease;
+        }
+
+        @keyframes panelFade {
+            from { opacity: 0; transform: translateX(10px); }
+            to   { opacity: 1; transform: translateX(0); }
+        }
+
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #444;
+            margin-bottom: 6px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: border-color 0.25s, box-shadow 0.25s;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .input-group input:focus {
+            border-color: #e74707;
+            box-shadow: 0 0 0 3px rgba(231,71,7,0.12);
+        }
+
+        .input-group input.error-input {
+            border-color: #e74c3c;
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.78rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #e74707, #db0b0b);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 6px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231,71,7,0.4);
+        }
+
+   
+        .panel-link {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .panel-link a {
+            color: #e74707;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .panel-link a:hover {
+            text-decoration: underline;
+        }
+
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 10px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            margin-bottom: 16px;
+            display: none;
+            text-align: center;
+        }
+
+
+        .pw-wrapper {
+            position: relative;
+        }
+
+        .pw-wrapper input {
+            padding-right: 44px;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: #888;
+            padding: 0;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            color: #888;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #e74707;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card { padding: 25px 20px; }
+        }
+    </style>
+</head>
+<body class="halaman-indeks login-page">
+
+    <header>
+        <h1>JELAJAH DUNIA BERSAMA</h1>
+        <h2>Maxmilian Richard Ongso</h2>
+        <h3>PT Jelajah Nusantara</h3>
+        <nav>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="tiongkok.html">Tiongkok</a></li>
+                <li><a href="jepang.html">Jepang</a></li>
+                <li><a href="swiss.html">Switzerland</a></li>
+                <li><a href="bali.html">Bali</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-card">
+
+            <div class="tab-switcher">
+                <button class="tab-btn active" onclick="showPanel('login')"> Login</button>
+                <button class="tab-btn" onclick="showPanel('register')"> Daftar</button>
+            </div>
+
+            <div id="panel-login" class="form-panel active">
+                <h2>Selamat Datang!</h2>
+                <p class="subtitle">Masuk ke akun Anda</p>
+
+                <div id="alert-login" class="alert-success">✅ Login berhasil! Mengalihkan...</div>
+
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="contoh@email.com">
+                    <p class="error-msg" id="err-login-email">Email tidak boleh kosong / tidak valid.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="login-pw">Password</label>
+                    <div class="pw-wrapper">
+                        <input type="password" id="login-pw" placeholder="Masukkan password">
+                        <button class="toggle-pw" onclick="togglePw('login-pw', this)" title="Tampilkan/sembunyikan">👁️</button>
+                    </div>
+                    <p class="error-msg" id="err-login-pw">Password tidak boleh kosong.</p>
+                </div>
+
+                <p class="panel-link" style="margin-top:0; margin-bottom:16px; text-align:right;">
+                    <a onclick="showPanel('lupa')">Lupa Password?</a>
+                </p>
+
+                <button class="btn-submit" onclick="doLogin()">Masuk</button>
+
+                <p class="panel-link">Belum punya akun? <a onclick="showPanel('register')">Daftar sekarang</a></p>
+            </div>
+
+            <div id="panel-register" class="form-panel">
+                <h2>Buat Akun Baru</h2>
+                <p class="subtitle">Bergabung bersama kami</p>
+
+                <div id="alert-register" class="alert-success">✅ Pendaftaran berhasil! Silakan login.</div>
+
+                <div class="input-group">
+                    <label for="reg-nama">Nama Lengkap</label>
+                    <input type="text" id="reg-nama" placeholder="Nama lengkap Anda">
+                    <p class="error-msg" id="err-reg-nama">Nama tidak boleh kosong.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-email">Email</label>
+                    <input type="email" id="reg-email" placeholder="contoh@email.com">
+                    <p class="error-msg" id="err-reg-email">Email tidak boleh kosong / tidak valid.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-pw">Password</label>
+                    <div class="pw-wrapper">
+                        <input type="password" id="reg-pw" placeholder="Minimal 6 karakter">
+                        <button class="toggle-pw" onclick="togglePw('reg-pw', this)" title="Tampilkan/sembunyikan">👁️</button>
+                    </div>
+                    <p class="error-msg" id="err-reg-pw">Password minimal 6 karakter.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="reg-pw2">Konfirmasi Password</label>
+                    <div class="pw-wrapper">
+                        <input type="password" id="reg-pw2" placeholder="Ulangi password">
+                        <button class="toggle-pw" onclick="togglePw('reg-pw2', this)" title="Tampilkan/sembunyikan">👁️</button>
+                    </div>
+                    <p class="error-msg" id="err-reg-pw2">Password tidak cocok.</p>
+                </div>
+
+                <button class="btn-submit" onclick="doRegister()">Daftar</button>
+
+                <p class="panel-link">Sudah punya akun? <a onclick="showPanel('login')">Login di sini</a></p>
+            </div>
+
+            <div id="panel-lupa" class="form-panel">
+                <h2>Lupa Password?</h2>
+                <p class="subtitle">Masukkan email Anda, kami akan mengirim link reset password</p>
+
+                <div id="alert-lupa" class="alert-success">✅ Link reset telah dikirim ke email Anda!</div>
+
+                <div class="input-group">
+                    <label for="lupa-email">Email Terdaftar</label>
+                    <input type="email" id="lupa-email" placeholder="contoh@email.com">
+                    <p class="error-msg" id="err-lupa-email">Email tidak boleh kosong / tidak valid.</p>
+                </div>
+
+                <button class="btn-submit" onclick="doLupa()">Kirim Link Reset</button>
+
+                <p class="panel-link"><a onclick="showPanel('login')">← Kembali ke Login</a></p>
+            </div>
+
+            <div class="back-link">
+                <a href="index.html">← Kembali ke Beranda</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 PT Jelajah Nusantara. All Rights Reserved.</p>
+        <div class="social-media">
+            <a href="https://www.instagram.com/klooktravel/">Instagram</a> |
+            <a href="https://www.facebook.com/Trip/">Facebook</a> |
+            <a href="https://x.com/traveloka">Twitter</a>
+        </div>
+    </footer>
+
+    <script src="JS/animations.js"></script>
+    <script>
+        function showPanel(nama) {
+            document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById('panel-' + nama).classList.add('active');
+
+            if (nama === 'login') document.querySelector('.tab-btn:nth-child(1)').classList.add('active');
+            if (nama === 'register') document.querySelector('.tab-btn:nth-child(2)').classList.add('active');
+
+            document.querySelectorAll('.error-msg').forEach(e => e.style.display = 'none');
+            document.querySelectorAll('.error-input').forEach(e => e.classList.remove('error-input'));
+            document.querySelectorAll('.alert-success').forEach(a => a.style.display = 'none');
+        }
+
+        function togglePw(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = '🙈';
+            } else {
+                input.type = 'password';
+                btn.textContent = '👁️';
+            }
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function showError(inputId, errId) {
+            document.getElementById(inputId).classList.add('error-input');
+            document.getElementById(errId).style.display = 'block';
+        }
+
+        function clearError(inputId, errId) {
+            document.getElementById(inputId).classList.remove('error-input');
+            document.getElementById(errId).style.display = 'none';
+        }
+
+        function doLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const pw    = document.getElementById('login-pw').value;
+            let valid = true;
+
+            clearError('login-email', 'err-login-email');
+            clearError('login-pw',    'err-login-pw');
+
+            if (!email || !isValidEmail(email)) {
+                showError('login-email', 'err-login-email'); valid = false;
+            }
+            if (!pw) {
+                showError('login-pw', 'err-login-pw'); valid = false;
+            }
+
+            if (!valid) return;
+
+            const alert = document.getElementById('alert-login');
+            alert.style.display = 'block';
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1800);
+        }
+
+        function doRegister() {
+            const nama  = document.getElementById('reg-nama').value.trim();
+            const email = document.getElementById('reg-email').value.trim();
+            const pw    = document.getElementById('reg-pw').value;
+            const pw2   = document.getElementById('reg-pw2').value;
+            let valid = true;
+
+            clearError('reg-nama',  'err-reg-nama');
+            clearError('reg-email', 'err-reg-email');
+            clearError('reg-pw',    'err-reg-pw');
+            clearError('reg-pw2',   'err-reg-pw2');
+
+            if (!nama) {
+                showError('reg-nama', 'err-reg-nama'); valid = false;
+            }
+            if (!email || !isValidEmail(email)) {
+                showError('reg-email', 'err-reg-email'); valid = false;
+            }
+            if (!pw || pw.length < 6) {
+                showError('reg-pw', 'err-reg-pw'); valid = false;
+            }
+            if (!pw2 || pw !== pw2) {
+                showError('reg-pw2', 'err-reg-pw2'); valid = false;
+            }
+
+            if (!valid) return;
+
+            const alert = document.getElementById('alert-register');
+            alert.style.display = 'block';
+            setTimeout(() => {
+                showPanel('login');
+            }, 2000);
+        }
+
+        function doLupa() {
+            const email = document.getElementById('lupa-email').value.trim();
+
+            clearError('lupa-email', 'err-lupa-email');
+
+            if (!email || !isValidEmail(email)) {
+                showError('lupa-email', 'err-lupa-email'); return;
+            }
+
+            const alert = document.getElementById('alert-lupa');
+            alert.style.display = 'block';
+            document.getElementById('lupa-email').value = '';
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key !== 'Enter') return;
+            const activePanel = document.querySelector('.form-panel.active').id;
+            if (activePanel === 'panel-login')    doLogin();
+            if (activePanel === 'panel-register') doRegister();
+            if (activePanel === 'panel-lupa')     doLupa();
+        });
+    </script>
+</body>
+</html>
