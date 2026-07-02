@@ -84,4 +84,86 @@ document.addEventListener('DOMContentLoaded', function () {
         const tahun = new Date().getFullYear();
         footerText.textContent = '© ' + tahun + ' PT Jelajah Nusantara. All Rights Reserved.';
     }
+
+    // --- 6. POPUP NOTIFIKASI DISKON + TIMER ---
+    // Muncul sekali setiap sesi saat pengguna membuka web, lalu hilang otomatis saat waktu habis
+    tampilkanPopupDiskon();
 });
+
+function tampilkanPopupDiskon() {
+    // Jangan tampilkan lagi di halaman diskon itu sendiri
+    const halamanSekarang = window.location.pathname.split('/').pop() || 'index.html';
+    if (halamanSekarang === 'diskon.html') return;
+
+    // Hanya tampil sekali per sesi browser
+    if (sessionStorage.getItem('diskonPopupSudahTampil') === 'true') return;
+
+    // Durasi promo berjalan (10 menit) untuk timer di popup
+    const DURASI_DETIK = 10 * 60;
+    let sisaWaktu = DURASI_DETIK;
+    let interval;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'diskon-overlay';
+    overlay.innerHTML = `
+        <div class="diskon-popup" role="dialog" aria-label="Notifikasi Diskon">
+            <button class="diskon-close" aria-label="Tutup">&times;</button>
+            <span class="diskon-badge">Penawaran Terbatas</span>
+            <h2>🎉 Dapatkan <span>Diskon hingga 30%</span>!</h2>
+            <p>Nikmati potongan harga spesial untuk paket wisata pilihan sebelum waktu promo berakhir.</p>
+            <div class="diskon-timer">
+                <div class="kotak-waktu"><span id="diskon-menit">10</span><small>MENIT</small></div>
+                <div class="kotak-waktu"><span id="diskon-detik">00</span><small>DETIK</small></div>
+            </div>
+            <div class="diskon-aksi">
+                <button class="btn-pergi" id="btn-diskon-pergi">Pergi ke Halaman Diskon</button>
+                <button class="btn-nanti" id="btn-diskon-nanti">Nanti Saja</button>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+
+    // Trigger animasi masuk
+    requestAnimationFrame(() => overlay.classList.add('tampil'));
+
+    const elMenit = overlay.querySelector('#diskon-menit');
+    const elDetik = overlay.querySelector('#diskon-detik');
+
+    function perbaruiTampilanTimer() {
+        const menit = Math.floor(sisaWaktu / 60);
+        const detik = sisaWaktu % 60;
+        elMenit.textContent = String(menit).padStart(2, '0');
+        elDetik.textContent = String(detik).padStart(2, '0');
+    }
+
+    function tutupPopup() {
+        clearInterval(interval);
+        overlay.classList.remove('tampil');
+        setTimeout(() => overlay.remove(), 350);
+        sessionStorage.setItem('diskonPopupSudahTampil', 'true');
+    }
+
+    perbaruiTampilanTimer();
+    interval = setInterval(() => {
+        sisaWaktu--;
+        perbaruiTampilanTimer();
+        if (sisaWaktu <= 0) {
+            tutupPopup();
+        }
+    }, 1000);
+
+    // Tombol "Pergi ke Halaman Diskon" -> pindah ke halaman diskon.html
+    overlay.querySelector('#btn-diskon-pergi').addEventListener('click', function () {
+        sessionStorage.setItem('diskonPopupSudahTampil', 'true');
+        window.location.href = 'diskon.html';
+    });
+
+    // Tombol "Nanti Saja" & tombol close -> tutup popup saja
+    overlay.querySelector('#btn-diskon-nanti').addEventListener('click', tutupPopup);
+    overlay.querySelector('.diskon-close').addEventListener('click', tutupPopup);
+
+    // Klik di luar kotak popup juga menutup
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) tutupPopup();
+    });
+}

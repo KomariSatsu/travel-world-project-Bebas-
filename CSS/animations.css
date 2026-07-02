@@ -94,6 +94,178 @@ video, audio {
     border-radius: 10px;
 }
 
+/* Link Diskon di navigasi — beda warna biar menonjol */
+nav ul li a.nav-diskon {
+    background: linear-gradient(135deg, #ffd700, #ff9800);
+    color: #2c2c2c !important;
+    padding: 6px 14px;
+    border-radius: 20px;
+    animation: pulseDiskon 1.8s infinite;
+}
+
+nav ul li a.nav-diskon:hover {
+    color: #2c2c2c !important;
+}
+
+nav ul li a.nav-diskon::after {
+    display: none;
+}
+
+@keyframes pulseDiskon {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 152, 0, 0.55); }
+    50%      { box-shadow: 0 0 0 8px rgba(255, 152, 0, 0); }
+}
+
+/* =============================================
+   POPUP NOTIFIKASI DISKON
+   ============================================= */
+.diskon-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 20px;
+}
+
+.diskon-overlay.tampil {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.diskon-popup {
+    background: linear-gradient(160deg, #ffffff, #fff7ea);
+    border-radius: 18px;
+    max-width: 420px;
+    width: 100%;
+    padding: 32px 28px 26px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    transform: scale(0.85) translateY(20px);
+    transition: transform 0.35s ease;
+    border: 3px solid #ffd700;
+}
+
+.diskon-overlay.tampil .diskon-popup {
+    transform: scale(1) translateY(0);
+}
+
+.diskon-popup .diskon-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.diskon-popup .diskon-close:hover {
+    color: #db0b0b;
+}
+
+.diskon-popup .diskon-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e74707, #db0b0b);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+
+.diskon-popup h2 {
+    font-size: 1.5rem;
+    color: #2c2c2c;
+    margin-bottom: 10px;
+}
+
+.diskon-popup h2 span {
+    color: #e74707;
+}
+
+.diskon-popup p {
+    color: #555;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.diskon-timer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+
+.diskon-timer .kotak-waktu {
+    background: #2c2c2c;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 1.3rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    min-width: 50px;
+}
+
+.diskon-timer .kotak-waktu small {
+    display: block;
+    font-size: 0.6rem;
+    color: #ccc;
+    font-weight: normal;
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
+
+.diskon-aksi {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.diskon-aksi .btn-pergi {
+    background: linear-gradient(135deg, #e74707, #db0b0b);
+    color: #fff;
+    border: none;
+    padding: 12px 26px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 6px 16px rgba(219, 11, 11, 0.35);
+}
+
+.diskon-aksi .btn-pergi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(219, 11, 11, 0.45);
+}
+
+.diskon-aksi .btn-nanti {
+    background: transparent;
+    color: #777;
+    border: 1px solid #ccc;
+    padding: 12px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.25s;
+}
+
+.diskon-aksi .btn-nanti:hover {
+    background: #f0f0f0;
+}
+
 /* Perbaikan tampilan halaman Tentang */
 .halaman-tentang article p {
     margin-bottom: 18px;
